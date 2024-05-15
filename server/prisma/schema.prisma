@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model abonnenewsletter {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique @db.VarChar(255)
+  date_inscription DateTime @default(now()) @db.Timestamp(0)
+}
+
+model categorierepas {
+  id    Int     @id @default(autoincrement())
+  nom   String  @db.VarChar(255)
+  repas repas[]
+}
+
+model employe {
+  id            Int         @id @default(autoincrement())
+  nom           String      @db.VarChar(255)
+  poste         String?     @db.VarChar(255)
+  image_url     String?     @db.VarChar(255) // Add image URL field
+  restaurant_id Int?
+  restaurant    restaurant? @relation(fields: [restaurant_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "employe_ibfk_1")
+
+  @@index([restaurant_id], map: "restaurant_id")
+}
+
+model repas {
+  id             Int             @id @default(autoincrement())
+  nom            String          @db.VarChar(255)
+  description    String?         @db.Text
+  prix           Decimal         @db.Decimal(10, 2)
+  image_url      String?         @db.VarChar(255) // Add image URL field
+  categorie_id   Int?
+  restaurant_id  Int?
+  categorierepas categorierepas? @relation(fields: [categorie_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "repas_ibfk_1")
+  restaurant     restaurant?     @relation(fields: [restaurant_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "repas_ibfk_2")
+
+  @@index([categorie_id], map: "categorie_id")
+  @@index([restaurant_id], map: "restaurant_id")
+}
+
+model restaurant {
+  id                    Int       @id @default(autoincrement())
+  nom                   String    @db.VarChar(255)
+  adresse               String?   @db.VarChar(255)
+  telephone             String?   @db.VarChar(20)
+  email                 String?   @db.VarChar(255)
+  newsletter_abonnement Boolean?  @default(false)
+  employe               employe[]
+  repas                 repas[]
+}

@@ -1,0 +1,14 @@
+<!-- Assuming your form submission route is handled by /subscribe -->
+
+<!-- Add this code at the top of your EJS template -->
+<% if (typeof errorMessage !== 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+      <%= errorMessage %>
+    </div>
+  <% } %>
+  
+  <!-- Your HTML form -->
+  <form action="/subscribe" method="POST">
+    <!-- Input fields and submit button -->
+  </form>
+  
