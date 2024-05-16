@@ -18,6 +18,7 @@ Resto Project is a web application that manages restaurant information, meal men
 - **EJS**: Embedded JavaScript templates for server-side rendering.
 - **Nodemailer**: Module for sending emails.
 - **CSRF Protection**: Middleware for protecting against Cross-Site Request Forgery attacks.
+- **Joi**: Data validation library for JavaScript.
 
 ## Prerequisites
 
