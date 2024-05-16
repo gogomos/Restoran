@@ -18,13 +18,6 @@ app.use(requestLogger);
 
 // CSRF protection setup
 const csrfProtection = csrf({ cookie: true });
-// app.use(csrfProtection);
-
-// Pass CSRF token to all views
-// app.use((req, res, next) => {
-//   res.locals.csrfToken = req.csrfToken();
-//   next();
-// });
 
 // Set up EJS as the view engine
 app.set("view engine", "ejs");

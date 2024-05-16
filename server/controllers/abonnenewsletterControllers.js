@@ -41,7 +41,8 @@ const abonnenewsletterController = {
       });
 
       if (existemail) {
-        return res.render('index', { errorMessage: 'Email already exists' });
+        // return res.render('index', { errorMessage: 'Email already exists' });
+        return res.status(400).json({ error: "Email already exists" });
       }
       const abonnenewsletter = await prisma.abonnenewsletter.create({
         data: { email },
