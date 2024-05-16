@@ -45,9 +45,15 @@ const employeController = {
 
             try {
                 const employe = await prisma.employe.create({
-                    data: { nom, poste, restaurant_id: parseInt(restaurant_id), image_url: imageUrl }
+                    data: { 
+                        nom, 
+                        poste, 
+                        restaurant_id: parseInt(restaurant_id), 
+                        image_url: imageUrl 
+                    }
                 });
-                res.status(201).json(employe);
+                // res.status(201).json(employe);
+                res.redirect('/');
             } catch (error) {
                 console.error('Error creating employe:', error);
                 res.status(500).json({ error: 'Internal Server Error' });
@@ -69,7 +75,11 @@ const employeController = {
             }
 
             try {
-                const data = { nom, poste, restaurant_id: parseInt(restaurant_id) };
+                const data = { 
+                    nom, 
+                    poste, 
+                    restaurant_id: parseInt(restaurant_id) 
+                };
                 if (imageUrl) {
                     data.image_url = imageUrl;
                 }

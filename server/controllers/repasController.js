@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const upload = require('../middleware/multerConfig'); // Adjust the path if necessary
+const { repasSchema } = require('../helpers/validators');
 
 const repasController = {
     // Get all repas
@@ -42,6 +43,12 @@ const repasController = {
             let imageUrl = null;
             if (req.file) {
                 imageUrl = `/uploads/${req.file.filename}`;
+            }
+            const {error , value} = repasSchema.validate(req.body, { abortEarly: false });
+            if (error) {
+                return res.status(400).json({
+                    errors: error.details.map(detail => detail.message)
+                });
             }
 
             try {

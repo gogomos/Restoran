@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const repasController = require('../controllers/repasController');
-// const csrf = require('csurf');
-// const csrfProtection = csrf({ cookie: true });
-// Middleware to ensure CSRF token is passed
-// router.use(csrfProtection);
+// const validate = require('../middleware/validate');
 
 router.get('/', repasController.getAll);
 router.get('/:id', repasController.getById);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ajouter Repas</title>
+    <title>Ajouter Employé</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -27,8 +27,7 @@
         font-weight: bold;
       }
       input[type="text"],
-      input[type="number"],
-      textarea,
+      input[type="file"],
       select {
         width: 100%;
         padding: 10px;
@@ -52,38 +51,27 @@
     </style>
   </head>
   <body>
-    <h1>Ajouter un Repas</h1>
-    <form action="/api/repas?_csrf=<%= csrfProtection %>" method="POST" enctype="multipart/form-data">
+    <h1>Ajouter un Employé</h1>
+    <form action="/api/employes?_csrf=<%= csrfProtection %>" method="POST" enctype="multipart/form-data">
       <label for="nom">Nom</label>
       <input type="text" name="nom" required />
       <br />
-      <label for="description">Description</label>
-      <textarea name="description" required></textarea>
-      <br />
-      <label for="prix">Prix</label>
-      <input type="number" name="prix" required />
+      <label for="poste">Poste</label>
+      <input type="text" name="poste" required />
       <br />
       <label for="image">Image</label>
       <input type="file" name="image" accept="image/*" required />
       <br />
       <br />
-      <label for="categorie_id">Categorie</label>
-      <select name="categorie_id" required>
-        <option value="">-- Choisir une Categorie --</option>
-        <% categories.forEach(function(categorie) { %>
-          <option value="<%= categorie.id %>"><%= categorie.nom %></option>
-        <% }) %>
-      </select>
-      <br />
-      <label for="restaurant_id">restaurant</label>
+      <label for="restaurant_id">Restaurant</label>
       <select name="restaurant_id" required>
-        <option value="">-- Choisir une restaurant --</option>
+        <option value="">-- Choisir un Restaurant --</option>
         <% restaurants.forEach(function(restaurant) { %>
           <option value="<%= restaurant.id %>"><%= restaurant.nom %></option>
         <% }) %>
       </select>
       <br />
-      <button type="submit">Ajouter un Repas</button>
+      <button type="submit">Ajouter un Employé</button>
     </form>
   </body>
 </html>
